@@ -9,7 +9,7 @@ export default function KnowledgeHeader({
     <>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-xl lg:text-xl font-bold text-slate-800 text-nowrap">
+          <h2 className="text-xl lg:text-2xl font-bold text-slate-800 text-nowrap">
             Knowledge Base
           </h2>
         </div>

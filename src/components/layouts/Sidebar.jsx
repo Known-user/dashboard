@@ -1,58 +1,90 @@
-import React from "react";
+import {
+  Box,
+  Zap,
+  Shield,
+  BookOpenCheck,
+  LaptopMinimal,
+  Rows3,
+  MonitorPlay,
+  Library,
+  IdCard,
+  Bot,
+  FileBox,
+  Columns3,
+} from "lucide-react";
+import { useState } from "react";
+
 
 const sections = [
   {
     title: "MY PROJECTS",
-    items: ["Agents", "AI Models", "Library"],
+    items: [
+      { name: "Agents", icon: Bot },
+      { name: "AI Models", icon: FileBox },
+      { name: "Library", icon: Columns3 },
+    ],
   },
   {
     title: "ORCHESTRATOR",
     items: [
-      "Published",
-      "Machines",
-      "Queues",
-      "Triggers",
-      "Jobs",
-      "Executions",
-      "Vault",
+      { name: "Published", icon: Bot },
+      { name: "Machines", icon: LaptopMinimal },
+      { name: "Queues", icon: Rows3 },
+      { name: "Triggers", icon: Zap },
+      { name: "Jobs", icon: MonitorPlay },
+      { name: "Executions", icon: MonitorPlay },
+      { name: "Vault", icon: Shield },
+      { name: "Knowledge Base", icon: BookOpenCheck },
+      { name: "Key Store", icon: Library },
     ],
   },
   {
     title: "ADMIN",
-    items: ["Tenant", "Integrations"],
+    items: [
+      { name: "Tenant", icon: IdCard },
+      { name: "Integrations", icon: Box },
+    ],
   },
 ];
 
 export default function Sidebar() {
+  const [active, setActive] = useState("Knowledge Base");
+
+  const handleClick = (name) => {
+    setActive(name);
+  };
   return (
-    <aside className="bg-white border-r border-slate-200 w-80 px-4 py-7 text-slate-700">
-      <div className="mb-6 text-2xl font-bold">Worcs</div>
-      {sections.map((section) => (
-        <div key={section.title} className="mb-5">
-          <p className="text-xs font-semibold uppercase text-slate-500 mb-2">
-            {section.title}
-          </p>
-          <ul className="space-y-1">
-            {section.items.map((item) => {
-              const active = item === "Knowledge Base";
-              return (
-                <li
-                  key={item}
-                  className={`rounded-lg px-3 py-2 cursor-pointer text-sm ${active
-                      ? "bg-indigo-100 text-indigo-700 font-semibold"
+    <aside className="bg-white border-r border-slate-200 w-50 lg:w-65 px-7 py-9 text-slate-700">
+      <div>
+        {sections.map((section) => (
+          <div key={section.title} className="mb-5">
+            <p className="text-xs md:text-[13px] font-semibold uppercase tracking-wide text-slate-500/75 mb-2">
+              {section.title}
+            </p>
+            <ul className="space-y-1">
+              {section.items.map(({ name, icon: Icon }) => {
+                return (
+                  <li
+                    key={name}
+                    onClick={() => handleClick(name)}
+                    className={`relative flex items-center gap-2.5 rounded-lg px-4 py-2.5 cursor-pointer text-sm font-semibold ${active === name
+                      ? "bg-indigo-100 text-indigo-700"
                       : "text-slate-700 hover:bg-slate-100"
-                    }`}
-                >
-                  {item}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ))}
-      <div className="border-t border-slate-200 pt-4 text-xs text-slate-500">
-        v1.0.0
+                      }`}
+                  >
+                    {active === name && (
+                      <span className="absolute left-0 top-2 bottom-2 w-0.75 rounded-md bg-indigo-500"></span>
+                    )}
+
+                    <Icon className="h-4 w-auto" />
+                    {name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </div>
     </aside>
   );
-}
+}           

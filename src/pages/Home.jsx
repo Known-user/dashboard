@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import KnowledgeCard from "../components/knowledge/KnowledgeCard";
-import KnowledgeMondal from "../components/knowledge/KnowledgeMondal";
+import KnowledgeModal from "../components/knowledge/KnowledgeModal";
 import KnowledgeHeader from "../components/knowledge/KnowledgeHeader";
 import KnowledgeFooter from "../components/knowledge/KnowledgeFooter";
 import { createPortal } from "react-dom";
-import { Files, ShieldHalf } from "lucide-react";
+import { Files } from "lucide-react";
 
 
 const cards = [
@@ -119,7 +119,7 @@ export default function Home() {
 
       {isModalOpen &&
         createPortal(
-          <KnowledgeMondal onClose={closeModal} onSubmit={submit} />,
+          <KnowledgeModal onClose={closeModal} onSubmit={submit} />,
           document.getElementById("modal-root"),
         )}
     </div>
